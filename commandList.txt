@@ -1,0 +1,5 @@
+riepilogo - Stampa a video un riepilogo sullo stato del sistema
+acqua - Stampa a video il livello di acqua nel tank
+temperatura - Stampa a video il valore di temperatura dell'acqua
+ph - Stampa a video il livello di PH dell'acqua
+led - Permette di selezionare un effetto led

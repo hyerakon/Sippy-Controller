@@ -1,0 +1,121 @@
+AntsItalia - MagicoModeratore - Telegram Bot
+
+FEATURES
+1 - Uso Esclusivo alla chat di gruppo
+2 - Frasi Feedback Preimpostate
+3 - Recupero Link da antsitalia.com e/o youtube.it
+4 - Procedimento trasgressori
+    4.1 - Recuperare il numero e la data delle infrazioni
+    4.2 - Suggerire un tipo di punizione in base alla gravità dell'infrazione
+    4.3 - Format del Procedimento
+5 - Fedina Penale
+    5.1 - Format della Fedina Penale
+6 - Peso delle Regole e Scriminanti
+
+DETAILS
+1 - Uso Esclusivo alla chat di gruppo
+ Mediante l'uso di chatID il bot potra' solo essere usato dai
+ membri partecipanti al gruppo telegram AntsItalia composto dai
+ moderatori. Qualunque altra interazione esterna restituira' un
+ messaggio di negato accesso alle funzionalita' del bot stesso.
+
+ Una possibile espansione prevede la possibilita' di interazioni
+ private solo ad un pool di user (identificati per mezzo del loro UserID)
+ che saranno considerati Moderatori di AntsItalia
+
+2 - Frasi Feedback Preimpostate
+ Il bot potra' fornire delle frasi standard da allegare al Feedback
+ in base della regola infranta oppure comporre piu' frasi pur rispettando
+ il vincolo dei 255 caratteri imposti da Facebook.
+ Nel caso di piu' regole selezionate ED il superamento dei 255 caratteri,
+ verranno restituiti i Feedback suggeriti per le regole con priorita' maggiore.
+
+3 - Recupero Link da antsitalia.com e/o youtube.it
+ Tramite l'inserimento di un nome specie o di un argomento, il bot
+ restituira' una tupla <titolo, link, ..., link> correlata al contenuto
+ cercato.
+ I.E.:  /link messor barbarus
+        Titolo: Messor barbarus
+        Link WEB: https://antsitalia.com/?p=857
+        Link YT: https://www.youtube.com/playlist?list=PLnlz2yOJxGuWeGcCJ9KaZayRuow3zSf5S
+
+ Nel caso non si inserisca alcun argomento, il bot suggerira' delle categorie
+ in accordo con menu' del sito di AntsItalia.
+
+4 - Procedimento trasgressori
+ Il bot si occupera' di mantenere un database di utenti e delle infrazioni da loro
+ commesse.
+ Questa "Cartella" potra' essere consultata e modificata da ogni moderatore.
+ 
+    4.1 - Recuperare il numero e la data delle infrazioni
+     Ogni moderatore potra' navigare la certella di un dato utente e 
+     consultare i dati ivi contenuti ordinandoli per: gravità, data.
+     Ogni infrazione sara' provvista di un campo "note" in cui inserire
+     informazioni aggiuntive e di contesto.
+
+    4.2 - Suggerire un tipo di punizione in base alla gravità dell'infrazione
+     Ad ogni consultazione verra' suggerito il periodo di silence adatto
+     al tipo di infrazioni (gravita') il quale sara' condizionato o mitigato in
+     base ai seguenti fattori:
+      - Tempo trascorso tra le infrazioni
+      - Tempo trascorso tra l'ultima infrazione e la data odierna
+      - Numero di infrazioni (1= Nessun suggerimento, 2=Silenziamento, 3= Silenziamento Lungo o BAN)
+     IMPORTANTE: Si trattera' solo di suggerimenti e quindi ai moderatori verra'
+     lasciata la possibilita' di decidere in autonomia.
+    
+    4.3 - Format del Procedimento
+     I campi di ciascun Procedimento sono i seguenti:
+    
+    [
+        Nome utente
+        Link al profilo (0 o 1)
+        Infrazioni (1 o +)
+        [
+            data
+            regola infranta
+            link al post (0 o 1)
+            note
+        ]    
+    ]
+
+5 - Ad ogni mod verra' chiesto se intende solo consultare la cartella di
+ un determinato utente o se vuole procedere e "sanzionare l'utente stesso"
+
+- Consultazione: Vedi punto 4
+- Sanzione: Il moderatore comunica la sanzione eseguita (manualmente dal mod stesso)
+            e la cartella dell'utente viene chiusa.
+ 
+ La cartella, una volta chiusa non viene eliminata, ma viene trasferita in un 
+ secondo database in cui sono registrate tutte le tuple <infrazioni, punizione>
+ di ogni utente inserito in precedenza.
+
+    5.1 - Format della Fedina Penale
+     I campi di ciascuna Fedina Penale sono i seguenti
+
+     4.3 - I campi di ciascun Procedimento sono i seguenti:
+    [
+        Nome utente
+        Link al profilo (0 o 1)
+        storia (1 o +)
+        [
+            punizione
+            infranzioni(2 o +)
+            [
+                data
+                regola infranta
+                link al post (0 o 1)
+                note
+            ]
+        ]   
+    ]
+
+6 - Peso delle Regole e Scriminanti
+ Il "peso" delle regole  stato calcolato sulla pase dei dati di un modulo
+ sotto forma di questionario fatto compilare a ciascun moderatore ed in seguito
+ applicando la seguente formula
+
+        SUM(ValoreVoto_i*NumeroVoti_i)
+        ---------------------------------
+               NumeroVotanti
+ 
+        
