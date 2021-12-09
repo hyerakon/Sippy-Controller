@@ -1,24 +1,24 @@
 from telegram import ParseMode
 
 def getStatus(update, context):
-    print("hello")
+    print("Richiesto Status del SIP da "+update.message.chat_id)
     todo(update, context)
 
 
 def getWaterLevel(update, context):
-    print("hello")
+    print("Richiesto Livello Acqua del SIP da "+update.message.chat_id)
     todo(update, context)
 
 def getTemperature(update, context):
-    print("hello")
+    print("Richiesto Temperatura Acqua del SIP da "+update.message.chat_id)
     todo(update, context)
 
 def getPh(update, context):
-    print("hello")
+    print("Richiesto Livello PH del SIP da "+update.message.chat_id)
     todo(update, context)
 
 def getLed(update, context):
-    print("hello")
+    print("Richiesto Stato dei Led del SIP da "+update.message.chat_id)
     todo(update, context)
 
 
