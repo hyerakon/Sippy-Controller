@@ -21,15 +21,6 @@ def getLed(update, context):
     print("hello")
     todo(update, context)
 
-def porcoDio(update, context):
-    print("hello")
-    chat_id = update.message.chat_id
-    
-    context.bot.send_message(
-        chat_id=chat_id, 
-        text='<b>Sempre sia lodato</b>', 
-        parse_mode=ParseMode.HTML
-        )
 
 #def hello(update, context):
 #    todo(update, context)
