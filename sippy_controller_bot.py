@@ -17,8 +17,7 @@ def main():
 	disp.add_handler(CommandHandler("temperatura",commands_manager.getTemperature))
 	disp.add_handler(CommandHandler("ph",commands_manager.getPh))
 	disp.add_handler(CommandHandler("led",commands_manager.getLed))
-	disp.add_handler(CommandHandler("porcodio", commands_manager.porcoDio))
-	#disp.add_handler(CommandHandler("nomenclatura", feedback_prompter.nomenclatura))
+	
 
 	
 	upd.start_polling()
