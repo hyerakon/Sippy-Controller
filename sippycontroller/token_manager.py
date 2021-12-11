@@ -1,5 +1,9 @@
 import os
-THIS_FOLDER = os.getcwd()
+
+from sippycontroller.command_logger import THIS_FOLDER
+#THIS_FOLDER = os.getcwd()
+THIS_FOLDER = os.path.dirname(os.path.realpath(__file__))
+
 token_file = os.path.join(THIS_FOLDER, 'tokens.txt')
 
 def getTokens(integer):
