@@ -3,13 +3,13 @@ import logging
 import os
 
 ## TEST
-print(__file__)
-print(os.path.join(os.path.dirname(__file__), '..'))
-print(os.path.dirname(os.path.realpath(__file__)))
-print(os.path.abspath(os.path.dirname(__file__)))
+#print(__file__)
+#print(os.path.join(os.path.dirname(__file__), '..'))
+#print(os.path.dirname(os.path.realpath(__file__)))
+#print(os.path.abspath(os.path.dirname(__file__)))
 ##
 
-THIS_FOLDER = os.path.join(os.getcwd,'/logs')
+THIS_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)),'/logs')
 os.makedirs(THIS_FOLDER, exist_ok=True)
 
 info_file = os.path.join(THIS_FOLDER, 'info.log')

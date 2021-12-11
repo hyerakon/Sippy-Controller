@@ -2,13 +2,13 @@ import os
 
 from sippycontroller.command_logger import THIS_FOLDER
 #THIS_FOLDER = os.getcwd()
-THIS_FOLDER = os.path.dirname(os.path.realpath(__file__))
+THIS_FOLDER = os.path.dirname(os.path.dirname(__file__))
 
 ## TEST
-print(__file__)
-print(os.path.join(os.path.dirname(__file__), '..'))
-print(os.path.dirname(os.path.realpath(__file__)))
-print(os.path.abspath(os.path.dirname(__file__)))
+#print(__file__)
+#print(os.path.join(os.path.dirname(__file__), '..'))
+#print(os.path.dirname(os.path.realpath(__file__)))
+#print(os.path.dirname(os.path.dirname(__file__)))
 ##
 
 token_file = os.path.join(THIS_FOLDER, 'tokens.txt')
