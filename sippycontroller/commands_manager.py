@@ -3,7 +3,7 @@ from telegram import ParseMode
 def getStatus(update, context):
     print("Richiesto Status del SIP da",update.message.from_user.username)
     todo(update, context)
-
+    
 
 def getWaterLevel(update, context):
     print("Richiesto Livello Acqua del SIP da"+update.message.from_user)

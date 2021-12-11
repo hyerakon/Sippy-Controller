@@ -3,6 +3,7 @@ import logging
 
 import os
 THIS_FOLDER = './sippycontroller/logs'
+os.makedirs(THIS_FOLDER, exist_ok=True)
 
 info_file = os.path.join(THIS_FOLDER, 'info.log')
 warning_file = os.path.join(THIS_FOLDER, 'warning.log')
