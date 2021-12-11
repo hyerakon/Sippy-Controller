@@ -2,7 +2,7 @@ from datetime import date
 import logging
 
 import os
-THIS_FOLDER = os.getcwd+'/logs'
+THIS_FOLDER = os.path.join(os.getcwd, '/logs')
 os.makedirs(THIS_FOLDER, exist_ok=True)
 
 info_file = os.path.join(THIS_FOLDER, 'info.log')
