@@ -1,5 +1,5 @@
 import os
-THIS_FOLDER = '.'
+THIS_FOLDER = os.getcwd()
 token_file = os.path.join(THIS_FOLDER, 'tokens.txt')
 
 def getTokens(integer):
