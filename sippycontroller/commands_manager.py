@@ -6,19 +6,19 @@ def getStatus(update, context):
     
 
 def getWaterLevel(update, context):
-    print("Richiesto Livello Acqua del SIP da"+update.message.from_user)
+    print("Richiesto Livello Acqua del SIP da",update.message.from_user)
     todo(update, context)
 
 def getTemperature(update, context):
-    print("Richiesto Temperatura Acqua del SIP da"+update.message.from_user)
+    print("Richiesto Temperatura Acqua del SIP da",update.message.from_user)
     todo(update, context)
 
 def getPh(update, context):
-    print("Richiesto Livello PH del SIP da"+update.message.from_user)
+    print("Richiesto Livello PH del SIP da",update.message.from_user)
     todo(update, context)
 
 def getLed(update, context):
-    print("Richiesto Stato dei Led del SIP da"+update.message.chat_id)
+    print("Richiesto Stato dei Led del SIP da",update.message.chat_id)
     todo(update, context)
 
 
