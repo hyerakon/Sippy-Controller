@@ -1,8 +1,11 @@
 from datetime import date
 import logging
 
+from pathlib import Path
 import os
-THIS_FOLDER = os.path.join(os.getcwd, '/logs')
+
+THIS_FOLDER = Path(__file__).resolve().parent()
+token_file = os.path.join(THIS_FOLDER, '/logs')
 os.makedirs(THIS_FOLDER, exist_ok=True)
 
 info_file = os.path.join(THIS_FOLDER, 'info.log')
