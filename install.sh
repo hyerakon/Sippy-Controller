@@ -5,8 +5,8 @@ function display_usage() {
 	echo "This script must be run with super-user privileges." 
 	echo -e "\nUsage: $0 'bot_token' \n" 
 	} 
-# if less than two arguments supplied, display usage 
-	if [  $# -le 1 ] 
+# if less than 1 arguments supplied, display usage 
+	if [  $# -le 0 ] 
 	then 
 		display_usage
 		exit 1
@@ -27,14 +27,13 @@ function display_usage() {
 
 TOKEN = $1
 
-pip install python-telegram-bot nanpy --upgrade
+apt-get install git -y
+pip3 install python-telegram-bot nanpy --upgrade
 
 git clone "https://github.com/hyerakon/sippy-controller.git" /opt
 
-if [ ! -f 'tokens.txt' ]; then
-    echo "$TOKEN---" > "/opt/tokens.txt"
-    python3 /opt/sippy-controller/sippy_controller_bot.py
-fi
+echo "$TOKEN---" > "/opt/sippy-controller/tokens.txt"
+python3 /opt/sippy-controller/sippy_controller_bot.py
 
 exit 0
 
