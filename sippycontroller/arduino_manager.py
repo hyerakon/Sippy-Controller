@@ -89,7 +89,8 @@ def arduino_setup():
 
 
 ############# LOOP ARDUINO
-
+def arduino_loop():
+    return 
 
 
 
