@@ -1,4 +1,4 @@
-from telegram import ParseMode, InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram import ParseMode, InlineKeyboardButton, InlineKeyboardMarkup, Update, callbackquery, update
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, CallbackContext
 from sippycontroller import arduino_manager
 
@@ -11,11 +11,12 @@ ph_emoji = u'\U0001F34B'
 led_emoji = u'\U0001F4A1'
 help_emoji = u'\U0001F647'
 
+stato_led = 'spenti'
 
 
 
 
-def start(update, context: CallbackContext) -> None:
+def menu(update, context: CallbackContext) -> None:
     """Sends a message with three inline buttons attached."""
     keyboard = [
         [
@@ -39,60 +40,161 @@ def start(update, context: CallbackContext) -> None:
 def button(update: Update, context: CallbackContext) -> None:
     """Parses the CallbackQuery and updates the message text."""
     query = update.callback_query
-
+    chat_id = query.message.chat.id
+    full_name = query.message.chat.full_name
+    
     # CallbackQueries need to be answered, even if no notification to the user is needed
     # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
     if query.data == 'riepilogo':
+        
+        print("Richiesto Status del SIP da", full_name)       
         query.answer()
-        query.edit_message_text(text=f"La tua serra Sippy e' in funzione: \nIl livello dell'acqua e': {arduino_manager.acqua}\nLa temperatura dell'acqua e': {arduino_manager.temp}\nIl PH dell'acqua e': {arduino_manager.ph}\nLo stato dei led e': {arduino_manager.luce}\n")
+        
+        context.bot.send_message(
+            chat_id = chat_id,
+            text=f"La tua serra Sippy e' in funzione: \n\nIl livello dell'<b>acqua</b> e': {arduino_manager.acqua} ml\nLa <b>temperatura</b> dell'acqua e': {arduino_manager.temp}\nIl <b>PH</b> dell'acqua e': {arduino_manager.ph}\nLo stato dei <b>LED</b> e': {arduino_manager.luce}\n", 
+            parse_mode=ParseMode.HTML
+            ) 
+
     elif query.data == 'acqua':
+        
+        print("Richiesto Livello Acqua del SIP da",full_name)
         query.answer()
-        query.edit_message_text(text=f"Il livello dell'acqua e': {arduino_manager.acqua}")
+        
+        context.bot.send_message(
+            chat_id = chat_id,
+            text=f"Il livello dell'acqua e': {arduino_manager.acqua} ml", 
+            parse_mode=ParseMode.HTML
+            )
+        
+
     elif query.data == 'temperatura':
-        query.answer()
-        query.edit_message_text(text=f"La temperatura dell'acqua e': {arduino_manager.temp}")
+        
+        print("Richiesto Temperatura Acqua del SIP da",full_name)
+        query.answer()        
+        
+        context.bot.send_message(
+            chat_id = chat_id,
+            text=f"La temperatura dell'acqua e': {arduino_manager.temp}", 
+            parse_mode=ParseMode.HTML
+            )
+
     elif query.data == 'ph':
+        
+        print("Richiesto Livello PH del SIP da",full_name)
         query.answer()
-        query.edit_message_text(text=f"Il PH dell'acqua e': {arduino_manager.ph}")
+        #query.edit_message_text(text=f"Il PH dell'acqua e': {arduino_manager.ph}")
+                
+        context.bot.send_message(
+            chat_id = chat_id,
+            text=f"Il PH dell'acqua e': {arduino_manager.ph}", 
+            parse_mode=ParseMode.HTML
+            )
+        
+        
     elif query.data == 'led':
+        
+        print("Richiesto Stato dei Led del SIP da",full_name)
         query.answer()
-        query.edit_message_text(text=f"Lo stato dei led e': {arduino_manager.luce}")
-    elif query.data == 'aiuto':
-        query.answer()
-        query.edit_message_text(text=f"Usa il comando '\start' per avviare il bot")            
+        #query.edit_message_text(text=f"Lo stato dei LED e': {stato}")
+                
+        if arduino_manager.luce == 1:
+            stato = 'accesi'
+        else:
+            stato = 'spenti'
     
+        context.bot.send_message(
+            chat_id = chat_id,
+            text="Lo stato dei LED e': {stato}", 
+            parse_mode=ParseMode.HTML
+            )
+        
+
+    elif query.data == 'help':
+        
+        print("Richiesto menu di Aiuto del SIP da",full_name)
+        query.answer()
+
+        context.bot.send_message(
+            chat_id = chat_id,
+            text=f"Usa il comando <b>/menu</b> per avviare il bot", 
+            parse_mode=ParseMode.HTML
+            )
+        
 
 
-def help_command(update: Update, context: CallbackContext) -> None:
-    """Displays info on how to use the bot."""
-    update.message.reply_text("Use /start to test this bot.")
+def help_command(update, context) -> None:
+    
+    full_name = update.message.chat.full_name
+    print("Richiesto menu di Aiuto del SIP da",full_name)
+
+
+    context.bot.send_message(
+            chat_id = update.message.chat_id,
+            text=f"Usa il comando <b>/menu</b> per avviare il bot", 
+            parse_mode=ParseMode.HTML
+            )
 
 def getStatus(update, context):
-    print("Richiesto Status del SIP da",update.message.from_user.username)
-    todo(update, context)  
+
+    full_name = update.message.chat.full_name
+    print("Richiesto Status del SIP da", full_name)
+    
+    context.bot.send_message(
+            chat_id = update.message.chat_id,
+            text=f"La tua serra Sippy e' in funzione: \n\nIl livello dell'<b>acqua</b> e': {arduino_manager.acqua} ml\nLa <b>temperatura</b> dell'acqua e': {arduino_manager.temp}\nIl <b>PH</b> dell'acqua e': {arduino_manager.ph}\nLo stato dei <b>LED</b> e': {arduino_manager.luce}\n", 
+            parse_mode=ParseMode.HTML
+            ) 
 
 def getWaterLevel(update, context):
-    print("Richiesto Livello Acqua del SIP da",update.message.from_user)
-    todo(update, context)
+    
+    full_name = update.message.chat.full_name
+    print("Richiesto Livello Acqua del SIP da",full_name)
+    
+    context.bot.send_message(
+            chat_id = update.message.chat_id,
+            text=f"Il livello dell'acqua e': {arduino_manager.acqua} ml", 
+            parse_mode=ParseMode.HTML
+            )
 
 def getTemperature(update, context):
-    print("Richiesto Temperatura Acqua del SIP da",update.message.from_user)
-    todo(update, context)
+    
+    full_name = update.message.chat.full_name
+    print("Richiesto Temperatura Acqua del SIP da",full_name)
+    
+    context.bot.send_message(
+            chat_id = update.message.chat_id,
+            text=f"La temperatura dell'acqua e': {arduino_manager.temp}", 
+            parse_mode=ParseMode.HTML
+            )
 
 def getPh(update, context):
-    print("Richiesto Livello PH del SIP da",update.message.from_user)
-    todo(update, context)
+    
+    full_name = update.message.chat.full_name
+    print("Richiesto Livello PH del SIP da",full_name)
+    
+    context.bot.send_message(
+            chat_id = update.message.chat_id,
+            text=f"Il PH dell'acqua e': {arduino_manager.ph}", 
+            parse_mode=ParseMode.HTML
+            )
 
 def getLed(update, context):
-    print("Richiesto Stato dei Led del SIP da",update.message.chat_id)
-    todo(update, context)
+    
+    full_name = update.message.chat.full_name
+    print("Richiesto Stato dei Led del SIP da",full_name)
 
-
-#def hello(update, context):
-#    todo(update, context)
-    #chat_id = update.message.chat_id
-    #message = "hello"
-    #context.bot.send_message(chat_id=chat_id, text='<b>hello</b>', parse_mode=ParseMode.HTML)
+    if arduino_manager.luce == 1:
+        stato = 'accesi'
+    else:
+        stato = 'spenti'
+    
+    context.bot.send_message(
+            chat_id = update.message.chat_id,
+            text="Lo stato dei LED e': {stato}", 
+            parse_mode=ParseMode.HTML
+            ) 
+    
 
 def todo(update, context):
     chat_id = update.message.chat_id

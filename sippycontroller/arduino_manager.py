@@ -48,7 +48,7 @@ AlimentazioneLuci =23
 tds = 0
 ph = 0
 luce = 0
-acqua = 0
+acqua = 2000
 temp = 0
 
 VREF =5.0      # analog reference voltage(Volt) of the ADC
