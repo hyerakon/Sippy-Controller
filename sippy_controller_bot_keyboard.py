@@ -20,8 +20,8 @@ def main():
 	disp.add_handler(CallbackQueryHandler(commands_manager.button))
 	disp.add_handler(CommandHandler("aiuto",commands_manager.help_command))
 	
-	arduino_manager.arduino_setup()
-	arduino_manager.arduino_loop()
+	#arduino_manager.arduino_setup()
+	#arduino_manager.arduino_loop()
 
 	upd.start_polling()
 
