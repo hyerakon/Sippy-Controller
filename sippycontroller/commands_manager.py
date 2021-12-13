@@ -15,21 +15,20 @@ stato_led = 'spenti'
 
 
 
-
 def menu(update, context: CallbackContext) -> None:
     """Sends a message with three inline buttons attached."""
     keyboard = [
         [
-            InlineKeyboardButton("Riepilogo "+status_emoji, callback_data='riepilogo'),
-            InlineKeyboardButton("Acqua "+water_emoji, callback_data='acqua')
+            InlineKeyboardButton(f"Riepilogo  {status_emoji}", callback_data='riepilogo'),
+            InlineKeyboardButton(f"Acqua  {water_emoji}", callback_data='acqua')
         ],
         [
-            InlineKeyboardButton("Temperatura "+temperature_emoji, callback_data='temperatura'),
-            InlineKeyboardButton("PH "+ph_emoji, callback_data='ph')
+            InlineKeyboardButton(f"Temperatura  {temperature_emoji}", callback_data='temperatura'),
+            InlineKeyboardButton(f"PH  {ph_emoji}", callback_data='ph')
         ],
         [
-            InlineKeyboardButton("LED "+led_emoji, callback_data='led'),
-            InlineKeyboardButton("Aiuto! "+help_emoji, callback_data='help')           
+            InlineKeyboardButton(f"LED  {led_emoji}", callback_data='led'),
+            InlineKeyboardButton(f"Aiuto!  {help_emoji}", callback_data='help')           
         ]
     ]
 

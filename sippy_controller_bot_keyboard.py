@@ -11,6 +11,7 @@ def main():
 	upd = Updater(TOKEN, use_context=True)
 	disp = upd.dispatcher
 	
+	disp.add_handler(CommandHandler("start",commands_manager.menu))
 	disp.add_handler(CommandHandler("menu",commands_manager.menu))
 	disp.add_handler(CommandHandler("riepilogo",commands_manager.getStatus))
 	disp.add_handler(CommandHandler("acqua",commands_manager.getWaterLevel))
