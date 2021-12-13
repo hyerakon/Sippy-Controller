@@ -99,13 +99,13 @@ def button(update: Update, context: CallbackContext) -> None:
         #query.edit_message_text(text=f"Lo stato dei LED e': {stato}")
                 
         if arduino_manager.luce == 1:
-            stato = 'accesi'
+            stato_led = 'accesi'
         else:
-            stato = 'spenti'
+            stato_led = 'spenti'
     
         context.bot.send_message(
             chat_id = chat_id,
-            text="Lo stato dei LED e': {stato}", 
+            text=f"Lo stato dei LED e': {stato_led}", 
             parse_mode=ParseMode.HTML
             )
         
@@ -185,13 +185,13 @@ def getLed(update, context):
     print("Richiesto Stato dei Led del SIP da",full_name)
 
     if arduino_manager.luce == 1:
-        stato = 'accesi'
+        stato_led = 'accesi'
     else:
-        stato = 'spenti'
+        stato_led = 'spenti'
     
     context.bot.send_message(
             chat_id = update.message.chat_id,
-            text="Lo stato dei LED e': {stato}", 
+            text=f"Lo stato dei LED e': {stato_led}", 
             parse_mode=ParseMode.HTML
             ) 
     
